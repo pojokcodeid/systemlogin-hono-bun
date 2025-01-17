@@ -43,5 +43,12 @@ bun run build ||
   false;
 )
 
+bunx --no-install commitlint --edit "$1" || (
+  echo "\\033[0;31m🚨 Commitlint Failed 🚨\\033[0m
+  The commit message did not pass commitlint.
+  Please review the errors above, fix them, and try committing again.";
+  false
+)
+
 # If everything passes... Now we can commit
 echo '✅ All checks passed! Proceeding with commit. ✅'

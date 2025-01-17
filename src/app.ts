@@ -2,7 +2,7 @@ import { Hono } from "hono";
 import { serveStatic } from "hono/bun";
 import userRoute from "./routes/userRoute";
 import AccessValidation from "./utils/AccessValidation";
-import HomeController from "./controllers/homeController";
+import HomeController from "./controllers/HomeController";
 
 const app = new Hono();
 
