@@ -1,0 +1,11 @@
+<div class="container mt-3">
+  <% if(message) { %>
+    <div class="alert alert-<%- type %> alert-dismissible fade show" role="alert">
+      <%- message %>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  <%}%>
+  <% if(data){ %>
+  <h1>Welcome <%- data.name %></h1>
+  <% } %>
+</div>

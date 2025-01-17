@@ -1,0 +1,5 @@
+POST http://localhost:3000/users/forgot
+Content-Type: application/json
+{
+  "to": "asep.010801503125082@gmail.com"
+}

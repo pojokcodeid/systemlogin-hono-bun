@@ -1,0 +1,72 @@
+<div
+  class="border d-flex align-items-center justify-content-center p-2"
+  style="height: 100vh"
+>
+  <div class="card col-lg-6 col-md-8 col-sm-8 bg-body-tertiary border-0">
+    <% if(message) { %>
+      <div class="alert alert-danger alert-dismissible fade border-0 show m-2" role="alert">
+        <%- message %>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    <%}%>
+    <% 
+      let { name, email, password, confirmPassword } = data 
+      || {"name":"","email": "", "password": "","confirmPassword":""};
+    %>
+    <div class="card-body">
+      <div class="card-title text-center mb-5">
+        <h1>Register</h1>
+      </div>
+      <form action="/users/register" method="post">
+        <div class="mb-3 row">
+          <label for="name" class="col-sm-3 col-form-label">Name</label>
+          <div class="col-sm-9">
+            <input type="text" class="form-control" id="name" name="name" value="<%- name %>"/>
+          </div>
+        </div>
+        <div class="mb-3 row">
+          <label for="email" class="col-sm-3 col-form-label">Email</label>
+          <div class="col-sm-6">
+            <input type="text" class="form-control" id="email" name="email" value="<%- email %>"/>
+          </div>
+        </div>
+        <div class="mb-3 row">
+          <label for="password" class="col-sm-3 col-form-label">Password</label>
+          <div class="col-sm-6">
+            <input
+              type="password"
+              class="form-control"
+              id="password"
+              name="password"
+              value="<%- password %>"
+            />
+          </div>
+        </div>
+        <div class="mb-3 row">
+          <label for="confirmPassword" class="col-sm-3 col-form-label">Confirm Password</label>
+          <div class="col-sm-6">
+            <input
+              type="password"
+              class="form-control"
+              id="confirmPassword"
+              name="confirmPassword"
+              value="<%- confirmPassword %>"
+            />
+          </div>
+        </div>
+        <div class="mb-3 row">
+          <div class="col-sm-3"></div>
+          <div class="col-sm-9">
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </div>
+        <div class="mb-3 row">
+          <div class="col-sm-12">
+            <label class="form-label float-start"><a href="/users/forgot">Forgot Password</a></label>
+            <label class="form-label float-end"><a href="/users/login">Login</a></label>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
