@@ -11,5 +11,11 @@ app.use("/public/*", serveStatic({ root: "./" }));
 app.route("/users", userRoute);
 
 app.get("/", AccessValidation.validateUserLogin, HomeController.getHome);
+app.get("/notallowed", HomeController.notAllowed);
+app.get(
+  "/acessfile",
+  AccessValidation.validateUserLogin,
+  HomeController.exampleAcess
+);
 
 export default app;

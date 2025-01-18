@@ -30,6 +30,16 @@ class HomeController {
     );
     return c.html(html);
   };
+
+  exampleAcess = async (c: Context) => {
+    const acessFile = await AccessValidation.acessFile(c, "ADMIN");
+    if (acessFile) {
+      return c.html(
+        "<html><head><title>Access Allowed</title></head><body><h1>Access Allowed</h1></body></html>"
+      );
+    }
+    return c.redirect("/notallowed");
+  };
 }
 
 export default new HomeController();

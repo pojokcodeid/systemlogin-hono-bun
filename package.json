@@ -9,7 +9,6 @@
     "check-format": "bunx prettier . --check",
     "build": "cp .env ./dist/.env && bun build ./src/index.ts --compile --minify --sourcemap --outfile dist/restapi --env inline",
     "start": "bun run dist/restapi",
-    "commitmsg": "commitlint -E HUSKY_GIT_PARAMS",
     "prepare": "husky"
   },
   "dependencies": {
