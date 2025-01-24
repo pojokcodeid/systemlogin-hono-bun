@@ -22,7 +22,7 @@ class UserController {
    * @param c - Objek konteks berisi informasi permintaan dan respon.
    * @returns Respon HTML untuk halaman list user atau respon redirect.
    */
-  getUsers = async (c: Context) => {
+  public getUsers = async (c: Context) => {
     if (!(await AccessValidation.acessFile(c, "ADMIN"))) {
       return c.redirect("/notallowed");
     }
@@ -53,7 +53,7 @@ class UserController {
    * @param c - Objek konteks berisi informasi permintaan dan respon.
    * @returns Respon HTML untuk form tambah user atau respon redirect.
    */
-  openAddUserForm = async (c: Context) => {
+  public openAddUserForm = async (c: Context) => {
     if (!(await AccessValidation.acessFile(c, "ADMIN"))) {
       return c.redirect("/notallowed");
     }
@@ -67,7 +67,7 @@ class UserController {
     return c.html(html);
   };
 
-  addUser = async (c: Context) => {
+  public addUser = async (c: Context) => {
     let data = {};
     try {
       data = await c.req.parseBody();
@@ -105,7 +105,7 @@ class UserController {
     }
   };
 
-  openRegisterForm = async (c: Context) => {
+  public openRegisterForm = async (c: Context) => {
     const { message, data } = Flash.getFlashData(c);
     const html = await Template(
       c,
@@ -119,7 +119,8 @@ class UserController {
     );
     return c.html(html);
   };
-  openForgotForm = async (c: Context) => {
+
+  public openForgotForm = async (c: Context) => {
     const { message, type, data } = Flash.getFlashData(c);
     const html = await Template(
       c,
@@ -135,7 +136,7 @@ class UserController {
     return c.html(html);
   };
 
-  openLogin = async (c: Context) => {
+  public openLogin = async (c: Context) => {
     const { message, type, data } = Flash.getFlashData(c);
     const html = await Template(
       c,
@@ -151,12 +152,12 @@ class UserController {
     return c.html(html);
   };
 
-  logoutUser = async (c: Context) => {
+  public logoutUser = async (c: Context) => {
     deleteCookie(c, "user");
     return c.redirect("/users/login");
   };
 
-  loginUser = async (c: Context) => {
+  public loginUser = async (c: Context) => {
     const data = await c.req.parseBody();
     try {
       const { email, password } = await loginValidation.parse(data);
@@ -193,7 +194,7 @@ class UserController {
     }
   };
 
-  forgotPassword = async (c: Context) => {
+  public forgotPassword = async (c: Context) => {
     // config cek link
     // https://mailmeteor.com/blog/gmail-smtp-settings
     // follow link config
@@ -223,7 +224,7 @@ class UserController {
     }
   };
 
-  openReset = async (c: Context) => {
+  public openReset = async (c: Context) => {
     const { key } = c.req.param();
     try {
       const user = await UserModel.getUserReset(key);
@@ -252,7 +253,7 @@ class UserController {
     }
   };
 
-  resetPassword = async (c: Context) => {
+  public resetPassword = async (c: Context) => {
     const { key } = c.req.param();
     const data = await c.req.parseBody();
     try {

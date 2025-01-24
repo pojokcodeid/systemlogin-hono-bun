@@ -3,22 +3,22 @@ import { PrismaClient, Role, User } from "@prisma/client";
 class UserModel {
   private prisma = new PrismaClient();
 
-  getAllUsers = async (): Promise<User[]> =>
+  public getAllUsers = async (): Promise<User[]> =>
     this.prisma.user
       .findMany()
       .then((users) =>
         users.map((user) => ({ ...user, password: "********" }))
       );
 
-  getUserById = async (id: number): Promise<User | null> =>
+  public getUserById = async (id: number): Promise<User | null> =>
     this.prisma.user
       .findUnique({ where: { id } })
       .then((user) => (user ? { ...user, password: "" } : null));
 
-  getUserByEmail = async (email: string): Promise<User | null> =>
+  public getUserByEmail = async (email: string): Promise<User | null> =>
     this.prisma.user.findUnique({ where: { email } });
 
-  createUser = async (
+  public createUser = async (
     name: string,
     email: string,
     password: string,
@@ -33,7 +33,7 @@ class UserModel {
       },
     });
 
-  updateUser = async (
+  public updateUser = async (
     id: number,
     name: string,
     email: string,
@@ -54,13 +54,13 @@ class UserModel {
       })
       .then((user) => (user ? { ...user, password: "********" } : null));
 
-  deleteUser = async (id: number): Promise<boolean> =>
+  public  deleteUser = async (id: number): Promise<boolean> =>
     this.prisma.user
       .delete({ where: { id } })
       .then(() => true)
       .catch(() => false);
 
-  verifyUser = async (email: string, password: string): Promise<User | null> =>
+  public verifyUser = async (email: string, password: string): Promise<User | null> =>
     this.getUserByEmail(email).then(async (user) => {
       if (user && (await this.comparePassword(password, user.password))) {
         return { ...user, password: "********" };
@@ -68,10 +68,10 @@ class UserModel {
       return null;
     });
 
-  getUserReset = async (key: string): Promise<User | null> =>
+  public getUserReset = async (key: string): Promise<User | null> =>
     this.prisma.user.findFirst({ where: { forgot: key } });
 
-  resetPassword = async (id: number, password: string): Promise<User | null> =>
+  public resetPassword = async (id: number, password: string): Promise<User | null> =>
     this.prisma.user
       .update({
         where: { id },
