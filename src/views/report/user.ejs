@@ -1,0 +1,19 @@
+<div class="p-3">
+  <h3 class="text-center mt-3">List User</h3>
+  <table class="table mt-3">
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Role</th>
+    </tr>
+    <% data.forEach(function(user){ %>
+      <tr>
+        <td><%= user.id %></td>
+        <td><%= user.name %></td>
+        <td><%= user.email %></td>
+        <td><%= user.role %></td>
+      </tr>
+    <% }); %>
+  </table>
+</div>

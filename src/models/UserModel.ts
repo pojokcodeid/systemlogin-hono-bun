@@ -54,13 +54,16 @@ class UserModel {
       })
       .then((user) => (user ? { ...user, password: "********" } : null));
 
-  public  deleteUser = async (id: number): Promise<boolean> =>
+  public deleteUser = async (id: number): Promise<boolean> =>
     this.prisma.user
       .delete({ where: { id } })
       .then(() => true)
       .catch(() => false);
 
-  public verifyUser = async (email: string, password: string): Promise<User | null> =>
+  public verifyUser = async (
+    email: string,
+    password: string
+  ): Promise<User | null> =>
     this.getUserByEmail(email).then(async (user) => {
       if (user && (await this.comparePassword(password, user.password))) {
         return { ...user, password: "********" };
@@ -71,7 +74,10 @@ class UserModel {
   public getUserReset = async (key: string): Promise<User | null> =>
     this.prisma.user.findFirst({ where: { forgot: key } });
 
-  public resetPassword = async (id: number, password: string): Promise<User | null> =>
+  public resetPassword = async (
+    id: number,
+    password: string
+  ): Promise<User | null> =>
     this.prisma.user
       .update({
         where: { id },
